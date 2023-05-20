@@ -1,3 +1,35 @@
+## Github authentication - [docs](https://docs.github.com/en/authentication)
+
+List existing keys 
+```
+ls -al ~/.ssh
+```
+
+Generate a key
+```
+ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+```
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+
+Copy the key and add it to your Github account
+```
+pbcopy < ~/.ssh/id_ed25519.pub
+```
+
+Test your SSH connection
+```
+ssh -T git@github.com
+```
+
+Add SSH key to ssh-agent
+```
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+```
+
+
 ## Creating a new repository
 
 ```
