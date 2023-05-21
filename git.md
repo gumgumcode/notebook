@@ -29,6 +29,12 @@ eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 ```
 
+On Mac OS:
+```
+ssh-add -K ~/.ssh/[your-private-key]
+ssh-add --apple-use-keychain ~/.ssh/[your-private-key]
+```
+
 
 ## Creating a new repository
 
