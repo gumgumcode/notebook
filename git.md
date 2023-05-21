@@ -1,11 +1,15 @@
 ## Github authentication - [docs](https://docs.github.com/en/authentication)
 
-List existing keys 
+### General steps
+
+1. List existing keys 
 ```
 ls -al ~/.ssh
 ```
 
-Generate a key
+2. Generate a key
+
+Use either `ed25519` or `rsa`:
 ```
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
@@ -13,25 +17,38 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ```
 
-Copy the key and add it to your Github account
+3. Copy the key and add it to your Github account
 ```
 pbcopy < ~/.ssh/id_ed25519.pub
 ```
 
-Test your SSH connection
+4. Test your SSH connection
 ```
 ssh -T git@github.com
 ```
 
-Add SSH key to ssh-agent
+5. Clone your repo using SSH
 ```
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_ed25519
+git clone git@github.com:omkarscode/notebook.git
 ```
 
-On Mac OS:
+### Add SSH key to ssh-agent
+
+The ssh-add command is used to add your private key to the SSH agent, which is a program that runs in the background and manages your SSH keys. By adding your private key to the agent, you can avoid typing your passphrase every time you establish an SSH connection or perform an action that requires authentication.
+
+On Linux:
+```
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/[your-private-key]
+```
+
+On older versions of MacOS:
 ```
 ssh-add -K ~/.ssh/[your-private-key]
+```
+
+On newer versions of MacOS (12.0 Monterey):
+```
 ssh-add --apple-use-keychain ~/.ssh/[your-private-key]
 ```
 
